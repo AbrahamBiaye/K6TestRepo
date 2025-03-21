@@ -1,0 +1,2274 @@
+{
+	"info": {
+		"_postman_id": "9cb7d8a3-2514-4268-a79b-af40fa90fcb1",
+		"name": "Forfait OM Final Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4263729"
+	},
+	"item": [
+		{
+			"name": "Generate Header Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Eligibility \"+pm.environment.get('msisdn')+\" OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"if (pm.response.code== 200){\r",
+							"    var resp = JSON.parse(responseBody)\r",
+							"    pm.environment.set(\"token\", resp.token)\r",
+							"    pm.environment.set(\"pinCrypted\", resp.pinCrypted)\r",
+							"    pm.environment.set(\"appKey\", resp.apiKey)\r",
+							"    console.log(\"token-> \" + resp.token + \";secret-> \"+resp.pinCrypted + \";appKey -> \" +resp.apiKey)\r",
+							"    \r",
+							"    pm.environment.set(\"sequencePin\", resp.pinCryptedTango)\r",
+							"    pm.environment.set(\"em\",resp.em)\r",
+							"    //pm.environment.set(\"token\", resp.token)\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "__oms_user_language__",
+						"value": "fr"
+					},
+					{
+						"key": "__oms_terminal_version__",
+						"value": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "__oms_terminal_manufacturer__",
+						"value": "Google Inc."
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					},
+					{
+						"key": "__oms_terminal_uuid__",
+						"value": "{{duid}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "__oms_username__",
+						"value": "{{msisdn}}"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36"
+					},
+					{
+						"key": "__msisdn__",
+						"value": "{{msisdn}}"
+					},
+					{
+						"key": "__oms_terminal_os__",
+						"value": "ios"
+					},
+					{
+						"key": "__oms_terminal_model__",
+						"value": "MacIntel"
+					},
+					{
+						"key": "__app_version_name__",
+						"value": "Maxit"
+					},
+					{
+						"key": "__app_version__",
+						"value": "{{appVersion}}"
+					},
+					{
+						"key": "AppVersion",
+						"value": "{{appVersion}}"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "__package_name__",
+						"value": "{{packageName}}",
+						"type": "text"
+					},
+					{
+						"key": "__app_key__",
+						"value": "{{appKey}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://sugu-preprod.orange-sonatel.com/common/generate-header?msisdn={{msisdn}}&pin=2023&deviceId={{duid}}",
+					"protocol": "https",
+					"host": [
+						"sugu-preprod",
+						"orange-sonatel",
+						"com"
+					],
+					"path": [
+						"common",
+						"generate-header"
+					],
+					"query": [
+						{
+							"key": "msisdn",
+							"value": "{{msisdn}}"
+						},
+						{
+							"key": "pin",
+							"value": "2023"
+						},
+						{
+							"key": "deviceId",
+							"value": "{{duid}}"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetPendingTransaction TODO Copy",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "__oms_user_language__",
+								"value": "fr"
+							},
+							{
+								"key": "__oms_terminal_version__",
+								"value": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "__oms_terminal_manufacturer__",
+								"value": "Google Inc."
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "__oms_terminal_uuid__",
+								"value": "{{duid}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "__oms_username__",
+								"value": "{{msisdn}}"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36"
+							},
+							{
+								"key": "__msisdn__",
+								"value": "{{msisdn}}"
+							},
+							{
+								"key": "__oms_terminal_os__",
+								"value": "ios"
+							},
+							{
+								"key": "__oms_terminal_model__",
+								"value": "MacIntel"
+							},
+							{
+								"key": "__app_version_name__",
+								"value": "Maxit"
+							},
+							{
+								"key": "__app_version__",
+								"value": "2.4.0"
+							},
+							{
+								"key": "AppVersion",
+								"value": "2.4.0"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "__package_name__",
+								"value": "{{packageName}}",
+								"type": "text"
+							},
+							{
+								"key": "__app_key__",
+								"value": "{{appKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{suguUrl}}/v1/mob/services/SEWA,BY_OMY/tag?base=false&msisdn={{msisdn}}",
+							"host": [
+								"{{suguUrl}}"
+							],
+							"path": [
+								"v1",
+								"mob",
+								"services",
+								"SEWA,BY_OMY",
+								"tag"
+							],
+							"query": [
+								{
+									"key": "base",
+									"value": "false"
+								},
+								{
+									"key": "wallet",
+									"value": "12",
+									"disabled": true
+								},
+								{
+									"key": "msisdn",
+									"value": "{{msisdn}}"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "expires",
+							"value": "0"
+						},
+						{
+							"key": "strict-transport-security",
+							"value": "max-age=31536000 ; includeSubDomains"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "transfer-encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "date",
+							"value": "Wed, 16 Aug 2023 09:51:14 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 736,\n        \"title\": \"Pass Jour\",\n        \"tags\": \"SEWA,BY_OMY,DAY\",\n        \"icon\": \"flash\",\n        \"fallbackMessage\": null,\n        \"description\": \"TYPE:Jours\",\n        \"action\": null,\n        \"data\": \"TYPE:Jour\",\n        \"state\": \"ENABLED\",\n        \"weight\": 1,\n        \"createdAt\": \"2023-08-15T16:41:58.000+00:00\",\n        \"modifiedAt\": \"2023-08-15T16:41:58.000+00:00\",\n        \"parentId\": 906,\n        \"parent\": null,\n        \"profile\": \"9132;9133;9111;9134;9131;HYBRIDE\"\n    },\n    {\n        \"id\": 739,\n        \"title\": \"Pass Semaine\",\n        \"tags\": \"SEWA,BY_OMY,WEEK\",\n        \"icon\": \"flash\",\n        \"fallbackMessage\": null,\n        \"description\": \"TYPE:Semaine\",\n        \"action\": null,\n        \"data\": \"TYPE:Semaine\",\n        \"state\": \"ENABLED\",\n        \"weight\": 3,\n        \"createdAt\": \"2023-08-15T16:42:13.000+00:00\",\n        \"modifiedAt\": \"2023-08-15T16:42:13.000+00:00\",\n        \"parentId\": 906,\n        \"parent\": null,\n        \"profile\": \"9132;9133;9111;9134;9131\"\n    },\n    {\n        \"id\": 742,\n        \"title\": \"Pass Mois\",\n        \"tags\": \"SEWA,BY_OMY,MONTH\",\n        \"icon\": \"flash\",\n        \"fallbackMessage\": null,\n        \"description\": \"TYPE:Mois\",\n        \"action\": null,\n        \"data\": \"TYPE:Mois\",\n        \"state\": \"ENABLED\",\n        \"weight\": 4,\n        \"createdAt\": \"2023-08-15T16:42:20.000+00:00\",\n        \"modifiedAt\": \"2023-08-15T16:42:20.000+00:00\",\n        \"parentId\": 906,\n        \"parent\": null,\n        \"profile\": \"9131;9132;9133;9134;9111;9135;HYBRIDE;OCS_FORFAIT_MOBILE\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "getBundleFull Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Récupération des forfait Full\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"if (pm.response.code == 200){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.test(\"Content OK\", function(){\r",
+							"        pm.expect(jsonData.length >=1)\r",
+							"    })\r",
+							"    pm.environment.set(\"bundleFull\", jsonData[0].id)\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "__oms_user_language__",
+						"value": "fr"
+					},
+					{
+						"key": "__oms_terminal_version__",
+						"value": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "__oms_terminal_manufacturer__",
+						"value": "Google Inc."
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					},
+					{
+						"key": "__oms_terminal_uuid__",
+						"value": "{{duid}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "__oms_username__",
+						"value": "{{msisdn}}"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36"
+					},
+					{
+						"key": "__msisdn__",
+						"value": "{{msisdn}}"
+					},
+					{
+						"key": "__oms_terminal_os__",
+						"value": "ios"
+					},
+					{
+						"key": "__oms_terminal_model__",
+						"value": "MacIntel"
+					},
+					{
+						"key": "__app_version_name__",
+						"value": "SAMEAI"
+					},
+					{
+						"key": "__app_version__",
+						"value": "{{appVersion}}"
+					},
+					{
+						"key": "AppVersion",
+						"value": "{{appVersion}}"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "__package_name__",
+						"value": "{{packageName}}",
+						"type": "text"
+					},
+					{
+						"key": "__app_key__",
+						"value": "{{appKey}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{suguUrl}}/v1/mob/forfait/get-bundle/FULL",
+					"host": [
+						"{{suguUrl}}"
+					],
+					"path": [
+						"v1",
+						"mob",
+						"forfait",
+						"get-bundle",
+						"FULL"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "SVAPass",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "__oms_user_language__",
+								"value": "fr"
+							},
+							{
+								"key": "__oms_terminal_version__",
+								"value": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "__oms_terminal_manufacturer__",
+								"value": "Google Inc."
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "__oms_terminal_uuid__",
+								"value": "{{duid}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "__oms_username__",
+								"value": "{{msisdn}}"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36"
+							},
+							{
+								"key": "__msisdn__",
+								"value": "{{msisdn}}"
+							},
+							{
+								"key": "__oms_terminal_os__",
+								"value": "ios"
+							},
+							{
+								"key": "__oms_terminal_model__",
+								"value": "MacIntel"
+							},
+							{
+								"key": "__app_version_name__",
+								"value": "SAMEAI"
+							},
+							{
+								"key": "__app_version__",
+								"value": "{{appVersion}}"
+							},
+							{
+								"key": "AppVersion",
+								"value": "{{appVersion}}"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "__package_name__",
+								"value": "{{packageName}}",
+								"type": "text"
+							},
+							{
+								"key": "__app_key__",
+								"value": "{{appKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{suguUrl}}/v1/mob/forfait/get-bundle/FULL",
+							"host": [
+								"{{suguUrl}}"
+							],
+							"path": [
+								"v1",
+								"mob",
+								"forfait",
+								"get-bundle",
+								"FULL"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "expires",
+							"value": "0"
+						},
+						{
+							"key": "strict-transport-security",
+							"value": "max-age=31536000 ; includeSubDomains"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "transfer-encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "date",
+							"value": "Thu, 25 Jul 2024 08:41:01 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"amount\": 100000,\n        \"description\": \"Forfait Mensuel OM\",\n        \"eligibleGrades\": [\n            \"FULL\"\n        ],\n        \"name\": \"forfait-mois\",\n        \"periodic\": false,\n        \"price\": 1000,\n        \"id\": \"666b70a1f3bf1a2519d00770\",\n        \"status\": \"ACTIVATED\",\n        \"validity\": 30\n    },\n    {\n        \"amount\": 15000,\n        \"description\": \"Forfait Hebdomadaire OM\",\n        \"eligibleGrades\": [\n            \"FULL\",\n            \"LITE\"\n        ],\n        \"name\": \"forfait-semaine\",\n        \"periodic\": false,\n        \"price\": 500,\n        \"id\": \"666c2cbcc28f11300c041864\",\n        \"status\": \"ACTIVATED\",\n        \"validity\": 7\n    },\n    {\n        \"amount\": 95000,\n        \"description\": \"Forfait Hebdomadaire OM\",\n        \"eligibleGrades\": [\n            \"FULL\"\n        ],\n        \"name\": \"forfait-semaine\",\n        \"periodic\": false,\n        \"price\": 750,\n        \"id\": \"666c33dbe12bbe53e6265e66\",\n        \"status\": \"ACTIVATED\",\n        \"validity\": 7\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "getBundleLite Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Récupération des forfait Lite\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"if (pm.response.code == 200){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.test(\"Content OK\", function(){\r",
+							"        pm.expect(jsonData.length >=1)\r",
+							"    })\r",
+							"    pm.environment.set(\"bundleLite\", jsonData[jsonData.length-1].id)\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "__oms_user_language__",
+						"value": "fr"
+					},
+					{
+						"key": "__oms_terminal_version__",
+						"value": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "__oms_terminal_manufacturer__",
+						"value": "Google Inc."
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					},
+					{
+						"key": "__oms_terminal_uuid__",
+						"value": "{{duid}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "__oms_username__",
+						"value": "{{msisdn}}"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36"
+					},
+					{
+						"key": "__msisdn__",
+						"value": "{{msisdn}}"
+					},
+					{
+						"key": "__oms_terminal_os__",
+						"value": "ios"
+					},
+					{
+						"key": "__oms_terminal_model__",
+						"value": "MacIntel"
+					},
+					{
+						"key": "__app_version_name__",
+						"value": "SAMEAI"
+					},
+					{
+						"key": "__app_version__",
+						"value": "{{appVersion}}"
+					},
+					{
+						"key": "AppVersion",
+						"value": "{{appVersion}}"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "__package_name__",
+						"value": "{{packageName}}",
+						"type": "text"
+					},
+					{
+						"key": "__app_key__",
+						"value": "{{appKey}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{suguUrl}}/v1/mob/forfait/get-bundle/LITE",
+					"host": [
+						"{{suguUrl}}"
+					],
+					"path": [
+						"v1",
+						"mob",
+						"forfait",
+						"get-bundle",
+						"LITE"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getBundleFull Copy",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "__oms_user_language__",
+								"value": "fr"
+							},
+							{
+								"key": "__oms_terminal_version__",
+								"value": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "__oms_terminal_manufacturer__",
+								"value": "Google Inc."
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "__oms_terminal_uuid__",
+								"value": "{{duid}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "__oms_username__",
+								"value": "{{msisdn}}"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36"
+							},
+							{
+								"key": "__msisdn__",
+								"value": "{{msisdn}}"
+							},
+							{
+								"key": "__oms_terminal_os__",
+								"value": "ios"
+							},
+							{
+								"key": "__oms_terminal_model__",
+								"value": "MacIntel"
+							},
+							{
+								"key": "__app_version_name__",
+								"value": "SAMEAI"
+							},
+							{
+								"key": "__app_version__",
+								"value": "{{appVersion}}"
+							},
+							{
+								"key": "AppVersion",
+								"value": "{{appVersion}}"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "__package_name__",
+								"value": "{{packageName}}",
+								"type": "text"
+							},
+							{
+								"key": "__app_key__",
+								"value": "{{appKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{suguUrl}}/v1/mob/forfait/get-bundle/LITE",
+							"host": [
+								"{{suguUrl}}"
+							],
+							"path": [
+								"v1",
+								"mob",
+								"forfait",
+								"get-bundle",
+								"LITE"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "expires",
+							"value": "0"
+						},
+						{
+							"key": "strict-transport-security",
+							"value": "max-age=31536000 ; includeSubDomains"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "transfer-encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "date",
+							"value": "Thu, 25 Jul 2024 08:41:33 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"amount\": 15000,\n        \"description\": \"Forfait Hebdomadaire OM\",\n        \"eligibleGrades\": [\n            \"FULL\",\n            \"LITE\"\n        ],\n        \"name\": \"forfait-semaine\",\n        \"periodic\": false,\n        \"price\": 500,\n        \"id\": \"666c2cbcc28f11300c041864\",\n        \"status\": \"ACTIVATED\",\n        \"validity\": 7\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "CheckForfait after subscription",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Récupération des Pass\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"if (pm.response.code == 200){\r",
+							"    var resp = JSON.parse(pm.response.text())\r",
+							"    pm.test(\"Content OK\", function(){\r",
+							"        pm.expect(resp.length >=1)\r",
+							"    })\r",
+							"    pm.environment.set(\"bundleBalance\", resp[0].balance)\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "__oms_user_language__",
+						"value": "fr"
+					},
+					{
+						"key": "__oms_terminal_version__",
+						"value": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "__oms_terminal_manufacturer__",
+						"value": "Google Inc."
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					},
+					{
+						"key": "__oms_terminal_uuid__",
+						"value": "{{duid}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "__oms_username__",
+						"value": "{{msisdn}}"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36"
+					},
+					{
+						"key": "__msisdn__",
+						"value": "{{msisdn}}"
+					},
+					{
+						"key": "__oms_terminal_os__",
+						"value": "ios"
+					},
+					{
+						"key": "__oms_terminal_model__",
+						"value": "MacIntel"
+					},
+					{
+						"key": "__app_version_name__",
+						"value": "SAMEAI"
+					},
+					{
+						"key": "__app_version__",
+						"value": "{{appVersion}}"
+					},
+					{
+						"key": "AppVersion",
+						"value": "{{appVersion}}"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "__package_name__",
+						"value": "{{packageName}}",
+						"type": "text"
+					},
+					{
+						"key": "__app_key__",
+						"value": "{{appKey}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{suguUrl}}/v1/mob/forfait/check-forfait/{{msisdn}}",
+					"host": [
+						"{{suguUrl}}"
+					],
+					"path": [
+						"v1",
+						"mob",
+						"forfait",
+						"check-forfait",
+						"{{msisdn}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "CheckForfait before",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "__oms_user_language__",
+								"value": "fr"
+							},
+							{
+								"key": "__oms_terminal_version__",
+								"value": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "__oms_terminal_manufacturer__",
+								"value": "Google Inc."
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "__oms_terminal_uuid__",
+								"value": "{{duid}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "__oms_username__",
+								"value": "{{msisdn}}"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36"
+							},
+							{
+								"key": "__msisdn__",
+								"value": "{{msisdn}}"
+							},
+							{
+								"key": "__oms_terminal_os__",
+								"value": "ios"
+							},
+							{
+								"key": "__oms_terminal_model__",
+								"value": "MacIntel"
+							},
+							{
+								"key": "__app_version_name__",
+								"value": "SAMEAI"
+							},
+							{
+								"key": "__app_version__",
+								"value": "{{appVersion}}"
+							},
+							{
+								"key": "AppVersion",
+								"value": "{{appVersion}}"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "__package_name__",
+								"value": "{{packageName}}",
+								"type": "text"
+							},
+							{
+								"key": "__app_key__",
+								"value": "{{appKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{suguUrl}}/v1/mob/forfait/check-forfait/{{msisdn}}",
+							"host": [
+								"{{suguUrl}}"
+							],
+							"path": [
+								"v1",
+								"mob",
+								"forfait",
+								"check-forfait",
+								"{{msisdn}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "expires",
+							"value": "0"
+						},
+						{
+							"key": "strict-transport-security",
+							"value": "max-age=31536000 ; includeSubDomains"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "transfer-encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "date",
+							"value": "Tue, 13 Aug 2024 08:54:08 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"balance\": 300000,\n        \"bundleOfferId\": \"666b70a1f3bf1a2519d00770\",\n        \"bundleOfferName\": \"forfait-mois\",\n        \"bundleOfferDescription\": \"Forfait Mensuel OM\",\n        \"subscribedBy\": \"782954881\",\n        \"subscriber\": \"780101919\",\n        \"validFor\": {\n            \"startDateTime\": \"2024-08-13T08:51:29.306\",\n            \"endDateTime\": \"2024-09-12T08:51:29.303\"\n        },\n        \"subscriptionId\": \"666c2f0ee12bbe53e6265e64\",\n        \"status\": \"ACTIVE\"\n    }\n]"
+				},
+				{
+					"name": "CheckForfaitafter",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "__oms_user_language__",
+								"value": "fr"
+							},
+							{
+								"key": "__oms_terminal_version__",
+								"value": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "__oms_terminal_manufacturer__",
+								"value": "Google Inc."
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "__oms_terminal_uuid__",
+								"value": "{{duid}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "__oms_username__",
+								"value": "{{msisdn}}"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36"
+							},
+							{
+								"key": "__msisdn__",
+								"value": "{{msisdn}}"
+							},
+							{
+								"key": "__oms_terminal_os__",
+								"value": "ios"
+							},
+							{
+								"key": "__oms_terminal_model__",
+								"value": "MacIntel"
+							},
+							{
+								"key": "__app_version_name__",
+								"value": "SAMEAI"
+							},
+							{
+								"key": "__app_version__",
+								"value": "{{appVersion}}"
+							},
+							{
+								"key": "AppVersion",
+								"value": "{{appVersion}}"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "__package_name__",
+								"value": "{{packageName}}",
+								"type": "text"
+							},
+							{
+								"key": "__app_key__",
+								"value": "{{appKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{suguUrl}}/v1/mob/forfait/check-forfait/{{msisdn}}",
+							"host": [
+								"{{suguUrl}}"
+							],
+							"path": [
+								"v1",
+								"mob",
+								"forfait",
+								"check-forfait",
+								"{{msisdn}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "expires",
+							"value": "0"
+						},
+						{
+							"key": "strict-transport-security",
+							"value": "max-age=31536000 ; includeSubDomains"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "transfer-encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "date",
+							"value": "Tue, 13 Aug 2024 08:56:18 GMT"
+						},
+						{
+							"key": "connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"balance\": 298160,\n        \"bundleOfferId\": \"666b70a1f3bf1a2519d00770\",\n        \"bundleOfferName\": \"forfait-mois\",\n        \"bundleOfferDescription\": \"Forfait Mensuel OM\",\n        \"subscribedBy\": \"782954881\",\n        \"subscriber\": \"780101919\",\n        \"validFor\": {\n            \"startDateTime\": \"2024-08-13T08:51:29.306\",\n            \"endDateTime\": \"2024-09-12T08:51:29.303\"\n        },\n        \"subscriptionId\": \"666c2f0ee12bbe53e6265e64\",\n        \"status\": \"ACTIVE\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Ping Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Eligibility \"+pm.environment.get('msisdn')+\" OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"if (pm.response.code== 200){\r",
+							"    var resp = JSON.parse(responseBody)\r",
+							"    pm.test(\"Eligibilité OK\", function(){\r",
+							"        pm.expect(resp.eligible).to.be.eql(true)\r",
+							"    })\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "__oms_user_language__",
+						"value": "fr"
+					},
+					{
+						"key": "__oms_terminal_version__",
+						"value": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "__oms_terminal_manufacturer__",
+						"value": "Google Inc."
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					},
+					{
+						"key": "__oms_terminal_uuid__",
+						"value": "{{duid}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "__oms_username__",
+						"value": "{{msisdn}}"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36"
+					},
+					{
+						"key": "__msisdn__",
+						"value": "{{msisdn}}"
+					},
+					{
+						"key": "__oms_terminal_os__",
+						"value": "ios"
+					},
+					{
+						"key": "__oms_terminal_model__",
+						"value": "MacIntel"
+					},
+					{
+						"key": "__app_version_name__",
+						"value": "Maxit"
+					},
+					{
+						"key": "__app_version__",
+						"value": "9.1.1"
+					},
+					{
+						"key": "AppVersion",
+						"value": "9.1.1"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "__package_name__",
+						"value": "{{packageName}}",
+						"type": "text"
+					},
+					{
+						"key": "__app_key__",
+						"value": "{{appKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"msisdn\": \"{{msisdn}}\",\n  \"deviceId\": \"{{duid}}\"\n}"
+				},
+				"url": {
+					"raw": "{{suguUrl}}/v1/mob/ping",
+					"host": [
+						"{{suguUrl}}"
+					],
+					"path": [
+						"v1",
+						"mob",
+						"ping"
+					],
+					"query": [
+						{
+							"key": "wallet",
+							"value": "12",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetPendingTransaction TODO Copy",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "__oms_user_language__",
+								"value": "fr"
+							},
+							{
+								"key": "__oms_terminal_version__",
+								"value": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "__oms_terminal_manufacturer__",
+								"value": "Google Inc."
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "__oms_terminal_uuid__",
+								"value": "{{duid}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "__oms_username__",
+								"value": "{{msisdn}}"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36"
+							},
+							{
+								"key": "__msisdn__",
+								"value": "{{msisdn}}"
+							},
+							{
+								"key": "__oms_terminal_os__",
+								"value": "ios"
+							},
+							{
+								"key": "__oms_terminal_model__",
+								"value": "MacIntel"
+							},
+							{
+								"key": "__app_version_name__",
+								"value": "Maxit"
+							},
+							{
+								"key": "__app_version__",
+								"value": "2.4.0"
+							},
+							{
+								"key": "AppVersion",
+								"value": "2.4.0"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "__package_name__",
+								"value": "{{packageName}}",
+								"type": "text"
+							},
+							{
+								"key": "__app_key__",
+								"value": "{{appKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{suguUrl}}/v1/mob/services/SEWA,BY_OMY/tag?base=false&msisdn={{msisdn}}",
+							"host": [
+								"{{suguUrl}}"
+							],
+							"path": [
+								"v1",
+								"mob",
+								"services",
+								"SEWA,BY_OMY",
+								"tag"
+							],
+							"query": [
+								{
+									"key": "base",
+									"value": "false"
+								},
+								{
+									"key": "wallet",
+									"value": "12",
+									"disabled": true
+								},
+								{
+									"key": "msisdn",
+									"value": "{{msisdn}}"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "expires",
+							"value": "0"
+						},
+						{
+							"key": "strict-transport-security",
+							"value": "max-age=31536000 ; includeSubDomains"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "transfer-encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "date",
+							"value": "Wed, 16 Aug 2023 09:51:14 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 736,\n        \"title\": \"Pass Jour\",\n        \"tags\": \"SEWA,BY_OMY,DAY\",\n        \"icon\": \"flash\",\n        \"fallbackMessage\": null,\n        \"description\": \"TYPE:Jours\",\n        \"action\": null,\n        \"data\": \"TYPE:Jour\",\n        \"state\": \"ENABLED\",\n        \"weight\": 1,\n        \"createdAt\": \"2023-08-15T16:41:58.000+00:00\",\n        \"modifiedAt\": \"2023-08-15T16:41:58.000+00:00\",\n        \"parentId\": 906,\n        \"parent\": null,\n        \"profile\": \"9132;9133;9111;9134;9131;HYBRIDE\"\n    },\n    {\n        \"id\": 739,\n        \"title\": \"Pass Semaine\",\n        \"tags\": \"SEWA,BY_OMY,WEEK\",\n        \"icon\": \"flash\",\n        \"fallbackMessage\": null,\n        \"description\": \"TYPE:Semaine\",\n        \"action\": null,\n        \"data\": \"TYPE:Semaine\",\n        \"state\": \"ENABLED\",\n        \"weight\": 3,\n        \"createdAt\": \"2023-08-15T16:42:13.000+00:00\",\n        \"modifiedAt\": \"2023-08-15T16:42:13.000+00:00\",\n        \"parentId\": 906,\n        \"parent\": null,\n        \"profile\": \"9132;9133;9111;9134;9131\"\n    },\n    {\n        \"id\": 742,\n        \"title\": \"Pass Mois\",\n        \"tags\": \"SEWA,BY_OMY,MONTH\",\n        \"icon\": \"flash\",\n        \"fallbackMessage\": null,\n        \"description\": \"TYPE:Mois\",\n        \"action\": null,\n        \"data\": \"TYPE:Mois\",\n        \"state\": \"ENABLED\",\n        \"weight\": 4,\n        \"createdAt\": \"2023-08-15T16:42:20.000+00:00\",\n        \"modifiedAt\": \"2023-08-15T16:42:20.000+00:00\",\n        \"parentId\": 906,\n        \"parent\": null,\n        \"profile\": \"9131;9132;9133;9134;9111;9135;HYBRIDE;OCS_FORFAIT_MOBILE\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "GetTransactionsHistory",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code == 200)\r",
+							"{\r",
+							"    var trxs = JSON.parse(responseBody);\r",
+							"\r",
+							"    pm.test(pm.info.requestName+\" OK\", function () {\r",
+							"        pm.response.to.have.status(200);\r",
+							"    });\r",
+							"\r",
+							"    pm.test(\"trxs contains element\", function() {\r",
+							"        pm.expect(trxs.liste.length>=1)\r",
+							"    });\r",
+							"\r",
+							"    pm.test(\"Nombre de page doit être supérieur à 1\", function() {\r",
+							"        pm.expect(trxs.nbpages>1)\r",
+							"    });\r",
+							"\r",
+							"    //pm.environment.set(\"nbPagesHistory\", trxs.nbpages)\r",
+							"    pm.environment.set(\"trxHistory\", trxs.nbtransactions + 0)\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"/*var suguUrl         = pm.environment.get('suguUrl');",
+							"",
+							"var url  = `${suguUrl}/v1/mob/omy/last-transactions`;",
+							"//var data = `username=${username}&password=${password}&grant_type=${grantType}&client_id=${clientId}`;",
+							"",
+							"// Launch request",
+							"pm.sendRequest({",
+							"    url: url,",
+							"    method: 'POST',",
+							"    header: { 'Content-Type': 'application/x-www-form-urlencoded'},",
+							"    body: {",
+							"        mode: 'raw',",
+							"        raw: data",
+							"    }",
+							"},",
+							"function(err, response) {",
+							"    ",
+							"    var trxs = response.json();",
+							"    ",
+							"",
+							"    pm.test(\"Affichage des transactions OK\", function () {",
+							"        pm.response.to.have.status(200);",
+							"    });",
+							"",
+							"    pm.test(\"trxs contains element\", function() {",
+							"        pm.expect(trxs.liste.length>=1)",
+							"    });",
+							"",
+							"    pm.environment.set(\"nbPagesHistory\", trxs.nbpages)",
+							"    pm.environment.set(\"trxHistory\", trxs.nbtransactions)",
+							"",
+							"});",
+							"",
+							"*/"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "__oms_user_language__",
+						"value": "fr"
+					},
+					{
+						"key": "__oms_terminal_version__",
+						"value": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "__oms_terminal_manufacturer__",
+						"value": "Google Inc."
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJkdWlkIjoiQ0MwQjFEOTMtMDE3MC00OEE3LUEyMTgtQjgwM0E5Q0U1ODRGIiwiZHR5cGUiOiJpb3MiLCJtc2lzZG4iOiI3Nzc0Mzc0NTUiLCJtb2IiOnRydWUsInVjIjoiT01MIiwidXNlcl9uYW1lIjoiNzc3NDM3NDU1Iiwic3ViIjoiNzc3NDM3NDU1IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNzc3NDM3NDU1IiwiYXV0aCI6WyJVU0VSX01PQklMRSJdLCJleHAiOjE2OTExNTkzNTUsImlhdCI6MTY4MDc5MTM1NX0.iW4A400c1OGcg0QUxQkG_ZCm5tqodaHeL4a-fb0DpVA"
+					},
+					{
+						"key": "__oms_terminal_uuid__",
+						"value": "{{duid}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json; charset=utf-8"
+					},
+					{
+						"key": "__oms_username__",
+						"value": "{{msisdn}}"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36"
+					},
+					{
+						"key": "__msisdn__",
+						"value": "{{msisdn}}"
+					},
+					{
+						"key": "__oms_terminal_os__",
+						"value": "ios"
+					},
+					{
+						"key": "__oms_terminal_model__",
+						"value": "MacIntel"
+					},
+					{
+						"key": "__app_version_name__",
+						"value": "SAMEAI"
+					},
+					{
+						"key": "__app_version__",
+						"value": "9.2.7"
+					},
+					{
+						"key": "AppVersion",
+						"value": "9.2.7"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "__package_name__",
+						"value": "{{packageName}}",
+						"type": "text"
+					},
+					{
+						"key": "__app_key__",
+						"value": "{{appKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"msisdn\": \"\",\r\n    \"secret\": \"\",\r\n    \"count\": 5,\r\n    \"page\": 0,\r\n    \"size\": 5\r\n}"
+				},
+				"url": {
+					"raw": "{{suguUrl}}/v1/mob/omy/last-transactions?page=0&size=20",
+					"host": [
+						"{{suguUrl}}"
+					],
+					"path": [
+						"v1",
+						"mob",
+						"omy",
+						"last-transactions"
+					],
+					"query": [
+						{
+							"key": "count",
+							"value": "5",
+							"disabled": true
+						},
+						{
+							"key": "service",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "key",
+							"value": "éffectué",
+							"disabled": true
+						},
+						{
+							"key": "wallet",
+							"value": "12",
+							"disabled": true
+						},
+						{
+							"key": "size",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetLastTransactionsExample",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "__oms_user_language__",
+								"value": "fr"
+							},
+							{
+								"key": "__oms_terminal_version__",
+								"value": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "__oms_terminal_manufacturer__",
+								"value": "Google Inc."
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJkdWlkIjoiQ0MwQjFEOTMtMDE3MC00OEE3LUEyMTgtQjgwM0E5Q0U1ODRGIiwiZHR5cGUiOiJpb3MiLCJtc2lzZG4iOiI3Nzc0Mzc0NTUiLCJtb2IiOnRydWUsInVjIjoiT01MIiwidXNlcl9uYW1lIjoiNzc3NDM3NDU1Iiwic3ViIjoiNzc3NDM3NDU1IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiNzc3NDM3NDU1IiwiYXV0aCI6WyJVU0VSX01PQklMRSJdLCJleHAiOjE2OTExNTkzNTUsImlhdCI6MTY4MDc5MTM1NX0.iW4A400c1OGcg0QUxQkG_ZCm5tqodaHeL4a-fb0DpVA"
+							},
+							{
+								"key": "__oms_terminal_uuid__",
+								"value": "CC0B1D93-0170-48A7-A218-B803A9CE584F"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=utf-8"
+							},
+							{
+								"key": "__oms_username__",
+								"value": "{{msisdn}}"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36"
+							},
+							{
+								"key": "__msisdn__",
+								"value": "{{msisdn}}"
+							},
+							{
+								"key": "__oms_terminal_os__",
+								"value": "ios"
+							},
+							{
+								"key": "__oms_terminal_model__",
+								"value": "MacIntel"
+							},
+							{
+								"key": "__app_version_name__",
+								"value": "SAMEAI"
+							},
+							{
+								"key": "__app_version__",
+								"value": "2.4.0"
+							},
+							{
+								"key": "AppVersion",
+								"value": "2.4.0"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "__package_name__",
+								"value": "{{packageName}}",
+								"type": "text"
+							},
+							{
+								"key": "__app_key__",
+								"value": "{{appKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"msisdn\": \"{{msisdn}}\",\r\n    \"secret\": \"\"\r\n}"
+						},
+						"url": {
+							"raw": "{{suguUrl}}/v1/mob/omy/last-transactions?count=5",
+							"host": [
+								"{{suguUrl}}"
+							],
+							"path": [
+								"v1",
+								"mob",
+								"omy",
+								"last-transactions"
+							],
+							"query": [
+								{
+									"key": "count",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 07 Apr 2023 12:45:11 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin,Access-Control-Request-Method,Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1;mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"dateActionSysteme\": \"2023-04-07T12:42:54.000+00:00\",\n        \"dateAction\": \"2023-04-07T12:42:54.387+00:00\",\n        \"utilisateur\": \"777437455\",\n        \"msisdn\": \"777437455\",\n        \"service\": \"TOPUP\",\n        \"source\": \"OrangeMobile\",\n        \"terminalManufacturer\": \"Google Inc.\",\n        \"terminalUiid\": \"CC0B1D93-0170-48A7-A218-B803A9CE584F\",\n        \"terminalOs\": \"ios\",\n        \"terminalVersion\": \"5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36\",\n        \"terminalModel\": \"MacIntel\",\n        \"localisation\": null,\n        \"extraData\": \"RECEIVER:777437455\",\n        \"appVersion\": \"2.4.0\",\n        \"amount\": \"1\",\n        \"status\": \"SUCCEED\",\n        \"fee\": null,\n        \"txnId\": null,\n        \"wallet\": null,\n        \"localisationAddress\": null,\n        \"serviceLongName\": \"TOPUP\"\n    },\n    {\n        \"dateActionSysteme\": \"2023-04-07T11:05:52.000+00:00\",\n        \"dateAction\": \"2023-04-07T11:05:53.003+00:00\",\n        \"utilisateur\": \"777437455\",\n        \"msisdn\": \"777437455\",\n        \"service\": \"TRANSFERT_MONEY\",\n        \"source\": \"OrangeMobile\",\n        \"terminalManufacturer\": \"samsung\",\n        \"terminalUiid\": \"RP1A.200720.012\",\n        \"terminalOs\": \"android\",\n        \"terminalVersion\": \"11\",\n        \"terminalModel\": \"SM-A107F\",\n        \"localisation\": null,\n        \"extraData\": \"WALLET:OMY;RECEIVER:777917217\",\n        \"appVersion\": \"1.0.0\",\n        \"amount\": \"1\",\n        \"status\": \"SUCCEED\",\n        \"fee\": \"0.008\",\n        \"txnId\": \"PP230407.1105.A62251\",\n        \"wallet\": null,\n        \"localisationAddress\": null,\n        \"serviceLongName\": \"Transfert argent\"\n    },\n    {\n        \"dateActionSysteme\": \"2023-04-07T08:36:32.000+00:00\",\n        \"dateAction\": \"2023-04-07T08:36:32.628+00:00\",\n        \"utilisateur\": \"777437455\",\n        \"msisdn\": \"777437455\",\n        \"service\": \"TRANSFERT_MONEY\",\n        \"source\": \"OrangeMobile\",\n        \"terminalManufacturer\": \"samsung\",\n        \"terminalUiid\": \"RP1A.200720.012\",\n        \"terminalOs\": \"android\",\n        \"terminalVersion\": \"11\",\n        \"terminalModel\": \"SM-A107F\",\n        \"localisation\": null,\n        \"extraData\": \"WALLET:OMY;RECEIVER:777917217\",\n        \"appVersion\": \"1.0.0\",\n        \"amount\": \"1\",\n        \"status\": \"SUCCEED\",\n        \"fee\": \"0.008\",\n        \"txnId\": \"PP230407.0836.A49997\",\n        \"wallet\": null,\n        \"localisationAddress\": null,\n        \"serviceLongName\": \"Transfert argent\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "GetListSubscriptions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(pm.info.requestName+\" OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "__oms_user_language__",
+						"value": "fr"
+					},
+					{
+						"key": "__oms_terminal_version__",
+						"value": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "__oms_terminal_manufacturer__",
+						"value": "Google Inc."
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					},
+					{
+						"key": "__oms_terminal_uuid__",
+						"value": "{{duid}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "__oms_username__",
+						"value": "{{msisdn}}"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36"
+					},
+					{
+						"key": "__msisdn__",
+						"value": "{{msisdn}}"
+					},
+					{
+						"key": "__oms_terminal_os__",
+						"value": "ios"
+					},
+					{
+						"key": "__oms_terminal_model__",
+						"value": "MacIntel"
+					},
+					{
+						"key": "__app_version_name__",
+						"value": "SAMEAI"
+					},
+					{
+						"key": "__app_version__",
+						"value": "{{appVersion}}"
+					},
+					{
+						"key": "AppVersion",
+						"value": "{{appVersion}}"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "__package_name__",
+						"value": "{{packageName}}",
+						"type": "text"
+					},
+					{
+						"key": "__app_key__",
+						"value": "{{appKey}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{suguUrl}}/v1/mob/forfait/list-subscriptions/{{msisdn}}?sort=start_date_time,desc",
+					"host": [
+						"{{suguUrl}}"
+					],
+					"path": [
+						"v1",
+						"mob",
+						"forfait",
+						"list-subscriptions",
+						"{{msisdn}}"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "start_date_time,desc"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetListSubscriptions",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "__oms_user_language__",
+								"value": "fr"
+							},
+							{
+								"key": "__oms_terminal_version__",
+								"value": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "__oms_terminal_manufacturer__",
+								"value": "Google Inc."
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "__oms_terminal_uuid__",
+								"value": "{{duid}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "__oms_username__",
+								"value": "{{msisdn}}"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36"
+							},
+							{
+								"key": "__msisdn__",
+								"value": "{{msisdn}}"
+							},
+							{
+								"key": "__oms_terminal_os__",
+								"value": "ios"
+							},
+							{
+								"key": "__oms_terminal_model__",
+								"value": "MacIntel"
+							},
+							{
+								"key": "__app_version_name__",
+								"value": "SAMEAI"
+							},
+							{
+								"key": "__app_version__",
+								"value": "{{appVersion}}"
+							},
+							{
+								"key": "AppVersion",
+								"value": "{{appVersion}}"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "__package_name__",
+								"value": "{{packageName}}",
+								"type": "text"
+							},
+							{
+								"key": "__app_key__",
+								"value": "{{appKey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{suguUrl}}/v1/mob/forfait/list-subscriptions/771292317",
+							"host": [
+								"{{suguUrl}}"
+							],
+							"path": [
+								"v1",
+								"mob",
+								"forfait",
+								"list-subscriptions",
+								"771292317"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "expires",
+							"value": "0"
+						},
+						{
+							"key": "strict-transport-security",
+							"value": "max-age=31536000 ; includeSubDomains"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "DENY"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "transfer-encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "date",
+							"value": "Thu, 25 Jul 2024 08:43:57 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"balance\": 95000,\n        \"balanceBefore\": 0,\n        \"bundleOfferId\": \"666b70a1f3bf1a2519d00770\",\n        \"bundleOfferName\": \"forfait-mois\",\n        \"subscribedBy\": \"781099486\",\n        \"subscriber\": \"771292317\",\n        \"bundleOfferDescription\": \"Forfait Mensuel OM\",\n        \"validFor\": {\n            \"startDateTime\": \"2024-07-02T12:10:03.531\",\n            \"endDateTime\": \"2024-07-09T12:10:03.528\"\n        },\n        \"status\": \"EXPIRED\"\n    },\n    {\n        \"balance\": 15000,\n        \"balanceBefore\": 95000,\n        \"bundleOfferId\": \"666b70a1f3bf1a2519d00770\",\n        \"bundleOfferName\": \"forfait-mois\",\n        \"subscribedBy\": \"781099486\",\n        \"subscriber\": \"771292317\",\n        \"bundleOfferDescription\": \"Forfait Mensuel OM\",\n        \"validFor\": {\n            \"startDateTime\": \"2024-07-02T12:20:08.667\",\n            \"endDateTime\": \"2024-07-09T12:20:08.661\"\n        },\n        \"status\": \"EXPIRED\"\n    },\n    {\n        \"balance\": 15000,\n        \"balanceBefore\": 110000,\n        \"bundleOfferId\": \"666b70a1f3bf1a2519d00770\",\n        \"bundleOfferName\": \"forfait-mois\",\n        \"subscribedBy\": \"781099486\",\n        \"subscriber\": \"771292317\",\n        \"bundleOfferDescription\": \"Forfait Mensuel OM\",\n        \"validFor\": {\n            \"startDateTime\": \"2024-07-02T12:35:16.044\",\n            \"endDateTime\": \"2024-07-09T12:35:16.037\"\n        },\n        \"status\": \"EXPIRED\"\n    },\n    {\n        \"balance\": 15000,\n        \"balanceBefore\": 125000,\n        \"bundleOfferId\": \"666b70a1f3bf1a2519d00770\",\n        \"bundleOfferName\": \"forfait-mois\",\n        \"subscribedBy\": \"781099486\",\n        \"subscriber\": \"771292317\",\n        \"bundleOfferDescription\": \"Forfait Mensuel OM\",\n        \"validFor\": {\n            \"startDateTime\": \"2024-07-02T14:07:35.667\",\n            \"endDateTime\": \"2024-07-09T14:07:35.658\"\n        },\n        \"status\": \"EXPIRED\"\n    },\n    {\n        \"balance\": 15000,\n        \"balanceBefore\": 140000,\n        \"bundleOfferId\": \"666b70a1f3bf1a2519d00770\",\n        \"bundleOfferName\": \"forfait-mois\",\n        \"subscribedBy\": \"781099486\",\n        \"subscriber\": \"771292317\",\n        \"bundleOfferDescription\": \"Forfait Mensuel OM\",\n        \"validFor\": {\n            \"startDateTime\": \"2024-07-02T16:13:50.463\",\n            \"endDateTime\": \"2024-07-09T16:13:50.456\"\n        },\n        \"status\": \"EXPIRED\"\n    },\n    {\n        \"balance\": 15000,\n        \"balanceBefore\": 155000,\n        \"bundleOfferId\": \"666b70a1f3bf1a2519d00770\",\n        \"bundleOfferName\": \"forfait-mois\",\n        \"subscribedBy\": \"781099486\",\n        \"subscriber\": \"771292317\",\n        \"bundleOfferDescription\": \"Forfait Mensuel OM\",\n        \"validFor\": {\n            \"startDateTime\": \"2024-07-04T10:41:25.166\",\n            \"endDateTime\": \"2024-07-11T10:41:25.157\"\n        },\n        \"status\": \"EXPIRED\"\n    },\n    {\n        \"balance\": 15000,\n        \"balanceBefore\": 170000,\n        \"bundleOfferId\": \"666b70a1f3bf1a2519d00770\",\n        \"bundleOfferName\": \"forfait-mois\",\n        \"subscribedBy\": \"781099486\",\n        \"subscriber\": \"771292317\",\n        \"bundleOfferDescription\": \"Forfait Mensuel OM\",\n        \"validFor\": {\n            \"startDateTime\": \"2024-07-04T11:04:51.022\",\n            \"endDateTime\": \"2024-07-11T11:04:51.014\"\n        },\n        \"status\": \"EXPIRED\"\n    },\n    {\n        \"balance\": 15000,\n        \"balanceBefore\": 185000,\n        \"bundleOfferId\": \"666b70a1f3bf1a2519d00770\",\n        \"bundleOfferName\": \"forfait-mois\",\n        \"subscribedBy\": \"781099486\",\n        \"subscriber\": \"771292317\",\n        \"bundleOfferDescription\": \"Forfait Mensuel OM\",\n        \"validFor\": {\n            \"startDateTime\": \"2024-07-04T11:30:01.251\",\n            \"endDateTime\": \"2024-07-11T11:30:01.244\"\n        },\n        \"status\": \"EXPIRED\"\n    },\n    {\n        \"balance\": 95000,\n        \"balanceBefore\": 200000,\n        \"bundleOfferId\": \"666b70a1f3bf1a2519d00770\",\n        \"bundleOfferName\": \"forfait-mois\",\n        \"subscribedBy\": \"781099486\",\n        \"subscriber\": \"771292317\",\n        \"bundleOfferDescription\": \"Forfait Mensuel OM\",\n        \"validFor\": {\n            \"startDateTime\": \"2024-07-04T11:45:03.461\",\n            \"endDateTime\": \"2024-07-11T11:45:03.456\"\n        },\n        \"status\": \"EXPIRED\"\n    },\n    {\n        \"balance\": 15000,\n        \"balanceBefore\": 295000,\n        \"bundleOfferId\": \"666b70a1f3bf1a2519d00770\",\n        \"bundleOfferName\": \"forfait-mois\",\n        \"subscribedBy\": \"781099486\",\n        \"subscriber\": \"771292317\",\n        \"bundleOfferDescription\": \"Forfait Mensuel OM\",\n        \"validFor\": {\n            \"startDateTime\": \"2024-07-04T12:06:30.124\",\n            \"endDateTime\": \"2024-07-11T12:06:30.118\"\n        },\n        \"status\": \"EXPIRED\"\n    },\n    {\n        \"balance\": 15000,\n        \"balanceBefore\": 310000,\n        \"bundleOfferId\": \"666b70a1f3bf1a2519d00770\",\n        \"bundleOfferName\": \"forfait-mois\",\n        \"subscribedBy\": \"771292317\",\n        \"subscriber\": \"771292317\",\n        \"bundleOfferDescription\": \"Forfait Mensuel OM\",\n        \"validFor\": {\n            \"startDateTime\": \"2024-07-05T12:31:57.427\",\n            \"endDateTime\": \"2024-07-12T12:31:57.415\"\n        },\n        \"status\": \"EXPIRED\"\n    },\n    {\n        \"balance\": 15000,\n        \"balanceBefore\": 324990,\n        \"bundleOfferId\": \"666b70a1f3bf1a2519d00770\",\n        \"bundleOfferName\": \"forfait-mois\",\n        \"subscribedBy\": \"771292317\",\n        \"subscriber\": \"771292317\",\n        \"bundleOfferDescription\": \"Forfait Mensuel OM\",\n        \"validFor\": {\n            \"startDateTime\": \"2024-07-18T10:03:54.446\",\n            \"endDateTime\": \"2024-07-25T10:03:54.43\"\n        },\n        \"status\": \"ACTIVE\"\n    },\n    {\n        \"balance\": 15000,\n        \"balanceBefore\": 339990,\n        \"bundleOfferId\": \"666b70a1f3bf1a2519d00770\",\n        \"bundleOfferName\": \"forfait-mois\",\n        \"subscribedBy\": \"777917217\",\n        \"subscriber\": \"771292317\",\n        \"bundleOfferDescription\": \"Forfait Mensuel OM\",\n        \"validFor\": {\n            \"startDateTime\": \"2024-07-22T15:48:31.039\",\n            \"endDateTime\": \"2024-07-29T15:48:31.034\"\n        },\n        \"status\": \"ACTIVE\"\n    },\n    {\n        \"balance\": 15000,\n        \"balanceBefore\": 354990,\n        \"bundleOfferId\": \"666b70a1f3bf1a2519d00770\",\n        \"bundleOfferName\": \"forfait-mois\",\n        \"subscribedBy\": \"777917217\",\n        \"subscriber\": \"771292317\",\n        \"bundleOfferDescription\": \"Forfait Mensuel OM\",\n        \"validFor\": {\n            \"startDateTime\": \"2024-07-23T11:40:32.759\",\n            \"endDateTime\": \"2024-07-30T11:40:32.754\"\n        },\n        \"status\": \"ACTIVE\"\n    }\n]"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "suguUrl",
+			"value": "https://sugu-preprod-dsiosnsugu-isoprod.apps.malaw-prod.orange-sonatel.com/api",
+			"type": "string"
+		}
+	]
+}

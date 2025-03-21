@@ -1,0 +1,27 @@
+{
+    "urls":[
+        {
+    "preProdHeader": "https://sugu-preprod.orange-sonatel.com",                  
+    "suguPreprod": "https://sugu-preprod-dsiosnsugu-isoprod.apps.malaw-prod.orange-sonatel.com/api"
+        }
+    ],
+    "msisdns":[
+        {
+    "msisdn1": "w256ytyDOwD3MgDOGOgUFwXBiiiDUXMjwiti5X5giygOig3UUwtgGt3iFUMiFwXgMMDjtBggj3XMgDijOtOXwywFOwMyw3OFOgw3OyiDGU5Uj5UGUG53OMgX5gUFU5gOjUUF5t3yiG5wDtgBBBjGFwgFUwDFiGDiiFUjFOMGDwiOjjyGXXOGUyyUwM5Fy5M3OFtB5DFDUtgOt5gOyXyyXUDwgBUM3yBXjOtwBgOD3iGUgtBGBFU5Myw3wBgFXgGU3itG1a__2"
+
+        }
+    ],
+    "duids":[
+        {
+    "duid1": "CC0B1D93-0170-48A7-A218-B803A9CE584F"
+
+        }
+    ],
+    "pins":[
+        {
+    "pin1":"2023"
+        }
+    ]
+    
+
+}

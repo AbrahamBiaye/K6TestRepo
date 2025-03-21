@@ -1,0 +1,21 @@
+{
+    "headers" :[
+       {
+        "Content-Type": "application/json",
+        "__oms_user_language__": "fr",
+        "__oms_terminal_version__": "5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+        "__oms_terminal_manufacturer__": "Google Inc.",
+        "__oms_terminal_uuid__": "CC0B1D93-0170-48A7-A218-B803A9CE584F",
+        "__oms_username__": "771292317",
+        "User-Agent": "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36",
+        "__msisdn__": "771292317",
+        "__oms_terminal_os__": "ios",
+        "__oms_terminal_model__": "MacIntel",
+        "__app_version_name__": "SAMEAI",
+        "__app_version__": "14.1.0",
+        "Accept": "*/*",
+        "__package_name__": "com.ml.samea.mobile.osn"
+       }
+    ]
+  }
+  
